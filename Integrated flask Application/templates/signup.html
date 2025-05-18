@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Signup</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            animation: slideIn 0.8s forwards;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        .signup-box {
+            flex: 1;
+            padding: 40px;
+        }
+        .signup-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .signup-box input, .signup-box select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .signup-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .google-btn {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .terms {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .terms input {
+            margin-right: 10px;
+        }
+        .terms a {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+        .bmi-result {
+            margin-top: 10px;
+            font-weight: bold;
+            color: blue;
+            display: none;
+        }
+        .image-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 20px;
+            align-items: center;
+        }
+        .image-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        .modal-content p {
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signup-box">
+            <h2>Welcome New Fitness Enthusiast</h2>
+            <div class="google-btn">Sign up with Google</div>
+            <div class="google-btn">Sign up with GitHub</div>
+            <p>OR CONTINUE WITH</p>
+            <form action="/signup" method="post">
+                <input type="text" id="fullname" name="fullname" placeholder="Enter Full Name" required>
+                <input type="text" id="username" name="username" placeholder="Enter username or email ID" required>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+                <input type="password" id="verify-password" name="verify-password" placeholder="Verify password" required>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="number" id="weight" name="weight" placeholder="Weight (kg)" required>
+                <input type="number" step="0.01" id="height" name="height" placeholder="Height (meters)" required>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms-checkbox" name="terms" required>
+                    <label for="terms-checkbox">
+                        I agree to the <a onclick="openTerms()">Terms and Conditions</a>
+                    </label>
+                </div>
+                <p class="bmi-result" id="bmi-result"></p>
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="/">Login</a></p>
+        </div>
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1434682772747-f16d3ea162c3" alt="Fitness">
+            <img src="https://images.unsplash.com/photo-1434682705430-390b9de53750" alt="Workout">
+            <img src="https://images.unsplash.com/photo-1603988533324-9e39be986394" alt="Exercise">
+            <img src="https://images.unsplash.com/photo-1541757088-1c919081357f" alt="Training">
+            <img src="https://images.unsplash.com/photo-1543604055-dede4512686d" alt="Fitness lifestyle">
+            <img src="https://images.unsplash.com/photo-1675586677420-7dddf3abe7e1" alt="Healthy living">
+        </div>
+    </div>
+
+    <!-- Modal for Terms -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <h2>Terms and Conditions</h2>
+            <p id="terms-content">Loading...</p>
+            <button class="close-btn" onclick="closeTerms()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            let weight = document.getElementById("weight").value;
+            let height = document.getElementById("height").value;
+            let checkbox = document.getElementById("terms-checkbox");
+
+            if (!checkbox.checked) {
+                alert("Please agree to the Terms and Conditions.");
+                return;
+            }
+
+            if (weight && height) {
+                let bmi = (weight / (height * height)).toFixed(2);
+                let category = bmi < 18.5 ? "Underweight" :
+                              bmi <= 24.9 ? "Normal weight" :
+                              bmi <= 29.9 ? "Overweight" : "Obese";
+
+                document.getElementById("bmi-result").innerText = `Your BMI is ${bmi} (${category}).`;
+                document.getElementById("bmi-result").style.display = "block";
+            } else {
+                alert("Please enter valid weight and height.");
+            }
+        }
+
+        function openTerms() {
+            fetch('/static/terms.txt')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("terms-content").innerText = data;
+                    document.getElementById("terms-modal").style.display = "flex";
+                })
+                .catch(() => {
+                    document.getElementById("terms-content").innerText = "Failed to load terms.";
+                });
+        }
+
+        function closeTerms() {
+            document.getElementById("terms-modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>

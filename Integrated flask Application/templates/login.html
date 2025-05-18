@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-box {
+            flex: 1;
+            padding: 40px;
+        }
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .google-btn {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .image-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <div class="google-btn">Continue with Google</div>
+            <div class="google-btn">Continue with GitHub</div>
+            <p>OR CONTINUE WITH</p>
+            <form action="/login" method="post">
+                <input type="text" name="username" placeholder="Enter username" required>
+                <input type="password" name="password" placeholder="Enter password" required>
+                <button type="submit">Login</button>
+            </form>
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+            <p>Don't have an account? <a href="/signup">Sign up</a></p>
+            <!-- <p>Don't have an account? <a href=signup.html>Sign up</a></p> -->
+        </div>
+        <div class="image-grid">
+            <img src="https://images.unsplash.com/photo-1434682772747-f16d3ea162c3" alt="Fitness">
+            <img src="https://images.unsplash.com/photo-1434682705430-390b9de53750" alt="Workout">
+            <img src="https://images.unsplash.com/photo-1603988533324-9e39be986394" alt="Exercise">
+            <img src="https://images.unsplash.com/photo-1541757088-1c919081357f" alt="Training">
+            <img src="https://images.unsplash.com/photo-1543604055-dede4512686d" alt="Fitness lifestyle">
+            <img src="https://images.unsplash.com/photo-1675586677420-7dddf3abe7e1" alt="Healthy living">
+        </div>
+    </div>
+</body>
+</html>

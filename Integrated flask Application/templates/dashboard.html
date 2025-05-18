@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #e0f7fa 0%, #f4f4f4 100%);
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background-attachment: fixed;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 40px;
+        background: linear-gradient(to right, #00acc1, #43a047);
+        color: white;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 36px;
+        letter-spacing: 1px;
+        text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.4);
+        animation: pulse 1.5s infinite alternate; /* Subtle pulse animation */
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.03); }
+    }
+
+    .logout-btn {
+        padding: 14px 28px;
+        background-color: #e53935;
+        color: white;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        border: 1px solid transparent;
+    }
+
+    .logout-btn:hover {
+        background-color: #c62828;
+        transform: translateY(-3px) scale(1.02); /* Added slight scale on hover */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .container {
+        padding: 50px 40px 100px;
+    }
+
+    .section {
+        background: rgba(255, 255, 255, 0.9);
+        margin: 30px 0;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .section h2 {
+        margin-top: 0;
+        font-size: 30px;
+        color: #1565c0;
+        margin-bottom: 20px;
+        text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.15);
+        border-bottom: 2px solid #bbdefb;
+        padding-bottom: 10px;
+    }
+
+    /* AHAAY Tracker Section Styling */
+    .section:nth-child(1) h2 {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr-qgn4DelpXqdeBtS-12vhsI1RAiNiLSZFg&s');
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 24px; /* Adjust size as needed */
+        padding-left: 30px; /* Make space for the icon */
+        transition: color 0.3s ease;
+    }
+
+    .section:nth-child(1):hover h2 {
+        color: #0d47a1; /* Darker blue on hover */
+    }
+
+    /* AHAAY Chatbot Section Styling */
+    .section:nth-child(2) h2 {
+        background-image: url('https://via.placeholder.com/24/43a047/ffffff?Text=💬'); /* Placeholder Chatbot Icon */
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 24px; /* Adjust size as needed */
+        padding-left: 30px; /* Make space for the icon */
+        transition: color 0.3s ease;
+    }
+
+    .section:nth-child(2):hover h2 {
+        color: #00695c; /* Darker green on hover */
+    }
+
+    .tutorials {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        padding: 30px 0;
+    }
+
+    .tutorial-box {
+        background: linear-gradient(135deg, #f9fbe7 0%, #fffde7 100%);
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        padding: 30px;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid #eee;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tutorial-box:hover {
+        transform: scale(1.08);
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .tutorial-box h3 {
+        color: #2e7d32;
+        margin-bottom: 15px;
+        font-size: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .tutorial-box p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #666;
+        margin-bottom: 18px;
+    }
+
+    .tutorial-box a {
+        display: inline-block;
+        padding: 12px 22px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 1px solid transparent;
+    }
+
+    .tutorial-box a:hover {
+        background-color: #388e3c;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .footer {
+        text-align: center;
+        padding: 25px;
+        background: linear-gradient(to right, #00acc1, #43a047);
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        border-radius: 12px 12px 0 0;
+    }
+
+    #current-time {
+        font-weight: bold;
+        margin-right: 25px;
+        font-size: 18px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* --- Animations and Stickers --- */
+
+    @keyframes workoutCheer {
+        0% { transform: translateY(0) rotate(-5deg) scale(1); opacity: 0.8; }
+        50% { transform: translateY(-5px) rotate(5deg) scale(1.1); opacity: 1; }
+        100% { transform: translateY(0) rotate(-5deg) scale(1); opacity: 0.8; }
+    }
+
+    .workout-sticker {
+        position: absolute;
+        font-size: 24px; /* Adjust size as needed */
+        opacity: 0.7;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        pointer-events: none; /* Don't interfere with clicks */
+    }
+
+    /* Stickers for Tutorial Boxes */
+    .tutorial-box:nth-child(1)::before {
+        content: '⬆️';
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 30px;
+        animation: workoutCheer 1.9s infinite alternate;
+    }
+
+    .tutorial-box:nth-child(2)::after {
+        content: '💪';
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        font-size: 32px;
+        animation: workoutCheer 2.1s infinite alternate-reverse;
+    }
+
+    .tutorial-box:nth-child(3)::before {
+        content: '🧘';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 34px;
+        animation: workoutCheer 1.7s infinite alternate;
+    }
+
+    .tutorial-box:nth-child(4)::after {
+        content: '🦵';
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        font-size: 30px;
+        animation: workoutCheer 2.3s infinite alternate-reverse;
+    }
+
+    .tutorial-box:nth-child(5)::before {
+        content: '🚶‍♀️';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 28px;
+        animation: workoutCheer 2s infinite alternate;
+    }
+
+    /* AHAAY Tracker and Chatbot Sections - Icon and Hover Effects */
+    .section:nth-child(1) h2 { /* AHAAY Tracker */
+        background-image: url('https://via.placeholder.com/24/00acc1/ffffff?Text=📊'); /* Placeholder Tracker Icon */
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 24px; /* Adjust size as needed */
+        padding-left: 30px; /* Make space for the icon */
+        transition: color 0.3s ease;
+    }
+
+    .section:nth-child(1):hover h2 {
+        color: #0d47a1; /* Darker blue on hover */
+    }
+
+    .section:nth-child(2) h2 { /* AHAAY Chatbot */
+        background-image: url('https://via.placeholder.com/24/43a047/ffffff?Text=💬'); /* Placeholder Chatbot Icon */
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 24px; /* Adjust size as needed */
+        padding-left: 30px; /* Make space for the icon */
+        transition: color 0.3s ease;
+    }
+
+    .section:nth-child(2):hover h2 {
+        color: #00695c; /* Darker green on hover */
+    }
+
+    /* Subtle slide-in for section text (example) */
+    @keyframes subtleSlideIn {
+        0% { transform: translateX(-10px); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+    }
+
+    .section > p {
+        animation: subtleSlideIn 0.5s ease-out;
+    }
+
+</style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome, {{ username }}</h1>
+        <div>
+            <span id="current-time"></span>
+            <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h2>AHAAY Tracker</h2>
+            <p>The AHAAY Tracker is a real-time fitness tracking tool that uses MediaPipe Pose Detection to monitor body movements through a webcam. It counts exercise reps, gives posture feedback, and displays performance using a Streamlit-based interface, helping users improve form and track progress without any wearable devices.</p>
+            <a href="http://localhost:8501" target="_blank">View Tracker</a>
+        </div>
+        <div class="section">
+            <h2>AHAAY Chatbot</h2>
+            <p>The AHAAY Chatbot is an AI-powered virtual health assistant that provides personalized meal, fitness, and wellness recommendations based on the user’s BMI, gender, and health goals. It uses a Transformer model to generate real-time, interactive responses and is integrated into the web dashboard for easy access.</p>
+            <a href="{{ url_for('chatbot') }}">Open Chatbot</a>
+        </div>
+        <div>
+            <p>Exercise enhances physical health, boosts mood, increases energy, strengthens immunity, sharpens focus, improves sleep, and reduces stress effectively.</p>
+        </div>
+        <div class="section">
+            <h2>AHAAY X Exercise</h2>
+            <p>Explore our exercise details.</p>
+            <div class="tutorials">
+                <div class="tutorial-box">
+                    <h3>Pull-Up</h3>
+                    <p>Pull-ups strengthen back, shoulders, arms, core, enhance grip, improve posture, boost endurance, and build functional strength. 1.</p>
+                    <a href="https://drive.google.com/file/d/16LzKUy9_VefGc2i95kvDrOXA6MawqQAP/view?usp=drive_link" target="_blank">Watch</a>
+                </div>
+                <div class="tutorial-box">
+                    <h3>Push-Ups</h3>
+                    <p>Push-ups strengthen chest, shoulders, triceps, core, improve posture, increase endurance, enhance flexibility, and boost functional fitness. 2.</p>
+                    <a href="https://drive.google.com/file/d/1DbIMOxJEaYndGZLDDd2hvU4hRRBw0b9u/view?usp=drive_link" target="_blank">Watch</a>
+                </div>
+                <div class="tutorial-box">
+                    <h3>Sit-up</h3>
+                    <p>Sit-ups strengthen core, improve balance, enhance posture, build endurance, increase flexibility, tone abs, and support spinal stability. 3.</p>
+                    <a href="https://drive.google.com/file/d/1Pq1Qg-DBMjHHkZ3b5IjgYRLbebh1yGs4/view?usp=drive_link" target="_blank">Watch</a>
+                </div>
+                <div class="tutorial-box">
+                    <h3>Squats</h3>
+                    <p>Squats strengthen legs, improve core stability, enhance posture, boost flexibility, increase endurance, and build overall lower-body strength. 4.</p>
+                    <a href="https://drive.google.com/file/d/1x2b2bHc3tB9UfLER0pRghsOUAxeZMRsJ/view?usp=drive_link" target="_blank">Watch</a>
+                </div>
+                <div class="tutorial-box">
+                    <h3>Walking</h3>
+                    <p>Walking improves cardiovascular health, strengthens muscles, boosts mood, aids weight management, enhances flexibility, reduces stress, and promotes overall well-being. 5.</p>
+                    <a href="https://drive.google.com/file/d/1tEBgu0Y-YxuBBIPjUVNOdpxWxHPo729f/view?usp=drive_link" target="_blank">Watch</a>
+                </div>
+                <!-- Add more tutorial boxes as needed -->
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 AHAAY. All rights reserved.</p>
+    </div>
+
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById('current-time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeElement.innerText = `Current Time: ${hours}:${minutes}`;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to display time immediately
+    </script>
+</body>
+</html>

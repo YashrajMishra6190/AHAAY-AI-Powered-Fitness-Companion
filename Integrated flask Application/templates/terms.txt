@@ -1,0 +1,58 @@
+📜 Standard Terms and Conditions List for AI AHAAY Fitness Tracker + QnA Chatbot
+1. Acceptance of Terms
+By accessing or using the AI AHAAY Fitness Tracker, users agree to be bound by these Terms and Conditions.
+
+2. Use of Service
+The service is for informational and educational purposes only.
+
+Users must be 18 years or older, or have parental consent if under 18.
+
+Users agree not to misuse or exploit the app.
+
+3. Health Disclaimer
+The AI does not replace medical advice from qualified professionals.
+
+The app provides general suggestions based on BMI and dietary info; results may vary per individual.
+
+Always consult a doctor before starting any new fitness or diet plan.
+
+4. AI Chatbot Behavior
+The chatbot may answer questions based on available data and trends but cannot provide medical diagnoses or emergency services.
+
+Users should not rely solely on AI responses for critical health decisions.
+
+5. Data Privacy and Security
+Personal data (BMI, meals, weight) will be stored securely and used only to improve user experience.
+
+Data will not be shared with third parties without consent.
+
+Users have the right to request data deletion.
+
+6. Account Responsibility
+Users are responsible for maintaining confidentiality of their login credentials.
+
+Any misuse of the account should be reported immediately.
+
+7. Modifications to the App
+AI AHAAY may update features, pricing, or services without prior notice.
+
+Continued use means acceptance of any changes.
+
+8. Limitation of Liability
+The app developers are not liable for any health issues, injuries, or losses caused by reliance on AI suggestions.
+
+The app is provided “as is” without warranties of any kind.
+
+9. Prohibited Activities
+No spamming, hacking, reverse engineering, or misuse of AI.
+
+No uploading of false or harmful data.
+
+10. Termination
+We reserve the right to suspend or terminate access for violations of the Terms.
+
+11. Governing Law
+These Terms shall be governed by and interpreted under the laws of [Your Country/State].
+
+12. Contact Information
+For questions or issues, users can contact: [support@aiahaay.com]

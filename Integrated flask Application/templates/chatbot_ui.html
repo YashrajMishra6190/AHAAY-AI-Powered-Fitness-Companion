@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #a7ffeb 0%, #8c9eff 33%, #f9fbe7 66%, #ffab91 100%); /* Multi-color gradient */
+        background-size: 400% 400%; /* For potential animation */
+        animation: gradientShift 15s ease infinite; /* Subtle animated shift */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .chat-container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        width: 450px;
+        height: 650px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header h2 {
+        margin: 0;
+        color: #333;
+        font-size: 24px;
+    }
+
+    .logout-btn {
+        padding: 12px 24px;
+        background-color: #e53935;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+        background-color: #c62828;
+    }
+
+    .chat-box {
+        flex-grow: 1;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .chat-box div {
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        clear: both;
+    }
+
+    .chat-box .user {
+        background-color: #e0f7fa;
+        text-align: right;
+        color: #1a237e;
+        float: right;
+    }
+
+    .chat-box .bot {
+        background-color: #f0fff0;
+        text-align: left;
+        color: #2e7d32;
+        float: left;
+    }
+
+    .input-box {
+        display: flex;
+    }
+
+    .input-box input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .input-box button {
+        padding: 12px 24px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .input-box button:hover {
+        background-color: #0056b3;
+    }
+
+    /* --- Fitness Icons --- */
+    .icon-dumbbell {
+        position: absolute;
+        font-size: 20px;
+        color: #4CAF50;
+        top: 20px;
+        right: 20px;
+        opacity: 0.7;
+    }
+
+    .icon-heart {
+        position: absolute;
+        font-size: 22px;
+        color: #e53935;
+        bottom: 20px;
+        left: 20px;
+        opacity: 0.7;
+    }
+
+    .icon-running {
+        position: absolute;
+        font-size: 24px;
+        color: #00acc1;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        opacity: 0.6;
+    }
+
+    .icon-scale {
+        position: absolute;
+        font-size: 20px;
+        color: #ff9800;
+        bottom: 50px;
+        right: 15px;
+        opacity: 0.6;
+    }
+</style>
+</head>
+<body>
+    <span style="position: fixed; font-size: 26px; color: #4CAF50; top: 20px; right: 20px; opacity: 1.0;">🏋️</span>
+    <span style="position: fixed; font-size: 26px; color: #4CAF50; top: 20px; left: 20px; opacity: 1.0;">✌️</span>
+    <span style="position: fixed; font-size: 28px; color: #e53935; bottom: 20px; left: 20px; opacity: 1.0;">💪</span>
+    <span style="position: fixed; font-size: 30px; color: #00acc1; top: 50%; left: 20px; transform: translateY(-50%); opacity: 1.0;">🏃</span>
+    <span style="position: fixed; font-size: 26px; color: #ff9800; bottom: 50px; right: 20px; opacity: 1.0;">⚖️</span>
+    <span style="position: fixed; font-size: 30px; color: #00acc1; top: 50%; right: 20px; transform: translateY(-50%); opacity: 1.0;">🏆</span>
+    <div class="chat-container">
+        <div class="header">
+            <h2>Hi {{ username }}, I am AHAAY!</h2>
+            <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="chat-box" id="chat-box" style="position: relative;">
+            <span style="position: absolute; font-size: 40px; color: #2e7d32; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3; z-index: 0;">💬</span>
+        </div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === "") return;
+            const chatBox = document.getElementById('chat-box');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'user';
+            userDiv.textContent = userInput;
+            chatBox.appendChild(userDiv);
+
+            document.getElementById('user-input').value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+            const botDiv = document.createElement('div');
+            botDiv.className = 'bot';
+            botDiv.textContent = data.response;
+            chatBox.appendChild(botDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
